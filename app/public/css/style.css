@@ -130,6 +130,24 @@
 }
 
 
+.tebleMob{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .teblePC{
+        display: none;
+    }
+
+    .tebleMob{
+        display: block;
+    }
+ 
+ 
+}
+
+
+
 .menuTrans ul li a {
     color: #8f969c;
 }

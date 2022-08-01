@@ -32,7 +32,7 @@ module.exports = class Application {
 
     setMongoConnection() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost/xaitien', { useNewUrlParser: true, useUnifiedTopology: true });
+        mongoose.connect('mongodb://localhost/xaitien', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
     }
 
     setConfig() {
