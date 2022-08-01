@@ -36,21 +36,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
     
-            
-    
-      
             <div class=" position-relative collapse navbar-collapse justify-content-center" style="font-weight:800;"
                 id="navbarSupportedContent">
                
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-center" href="#home">خانه</a>
+                        <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#home': '/#home' %>">خانه</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="#class">کلاس‌ها</a>
+                        <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#class': '/#class' %>">کلاس‌ها</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="#calendar">برنامه‌کلاسی</a>
+                        <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#calendar': '/#calendar' %>">برنامه‌کلاسی</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-center" href="#">درباره‌ما</a>

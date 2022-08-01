@@ -23,6 +23,7 @@ module.exports = new class SingleController extends controller {
                 ]
             })
 
+
             if (!courses) throw new Error('چنین دوره ای وحود ندارد');
             return res.render('courses', { title: 'دوره‌ها', courses })
         } catch (err) {

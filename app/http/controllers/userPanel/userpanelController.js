@@ -8,6 +8,8 @@ module.exports = new class UserPanelController extends controller {
     // View main page
     async index(req, res, next) {
         try {
+
+
             let episode = await Episode.find({ user: req.user.id }).populate([
                 {
                     path: 'user',
