@@ -1,0 +1,67 @@
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f5f5f5;">
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7 col-11">
+        <div class="card mb-5">
+            <div class="card-header">
+                <h5 class="text-center fw-bold">ورود</h5>
+            </div>
+            
+            <div class="card-body">
+                <%- include(viewPath('resource/views/global/errors.ejs'))  %> 
+
+                <div class="d-flex justify-content-center">
+                    <svg class="colorLogo" xmlns="http://www.w3.org/2000/svg" width="85" height="85"
+                        fill="currentColor" class="bi bi-person-circle mb-3" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                </div>
+                <form class="needs-validation" action="/auth/login" method="POST" novalidate>
+                    <div class="form-row">
+                        <div class="col mb-2">
+                            <label class="mb-2" for="email">ایمیل</label>
+                            <input type="email" class="form-control py-2" value="<%= old('email') %>" name="email" id="email" placeholder="AmirhosseinGhodratnemaWork@gmail.com" required
+                                pattern=".{5,}">
+                            <div class="valid-feedback">
+                                <small> بسیار عالی!</small>
+                            </div>
+                            <div class="invalid-feedback">
+                                <small>ایمیل صحیح نیست !</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="mb-2" for="password">پسورد</label>
+                            <input type="password" class="form-control py-2" value="<%= old('email') %>" name="password" id="password"
+                                pattern=".{9,}" required>
+                            <div class="valid-feedback">
+                                <small>بسیار عالی !</small>
+                            </div>
+                            <div class="invalid-feedback">
+                                <small>پسورد الزامی است !</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-check my-3 BoxCheck">
+                        <input class="form-check-input checkBox" type="checkbox" name="rememberToken" id="flexCheckDefault">
+                        <label class="form-check-label textCheckBox" for="flexCheckDefault">
+                            <small>ذخیره رمز عبور</small>
+                        </label>
+                    </div> -->
+
+                    <div class="col mt-3">
+                        <%- captcha %>
+                    </div>
+
+                    <div class="col-12 my-3">
+                        <button class="btn btn-primary" type="submit">ورود</button>
+                        <a href="/auth/google" class="btn btn-danger">ورود با گوگل</a>
+                    </div>
+                    <div class="col-12 my-3">
+                        <a href="/auth/password-reset" class="btn">رمز خود را فراموش کرده ام.</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

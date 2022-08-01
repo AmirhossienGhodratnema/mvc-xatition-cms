@@ -1,0 +1,106 @@
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f5f5f5;">
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-11 ">
+        <div class="card mb-5">
+            <div class="card-header">
+                <h5 class="text-center fw-bold">ثبت نام</h5>
+            </div>
+            <div class="card-body">
+                <%- include(viewPath('resource/views/global/errors.ejs'))  %> 
+                <div class="d-flex justify-content-center">
+                    <div class="positionR">
+                        <svg class="colorTest colorLogo" xmlns="http://www.w3.org/2000/svg" width="85" height="85"
+                            fill="currentColor" class="bi bi-person-circle mb-3" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                        <svg class="posLogo colorLogo" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                            fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <form class="needs-validation" action="/auth/register" method="POST" novalidate>
+                    <div class="form-row col">
+                        <div class="d-flex">
+                            <div class="col-6 mb-2" style="padding-left: .2rem;">
+                                <label class="mb-2" form="name">نام</label>
+                                <input class="form-control py-2" value="<%= old('name') %>" name="name" type="text" id="name" placeholder="امیرحسین" pattern=".{3,}" required>
+                                <div class="valid-feedback">
+                                    <small>بسیار عالی !</small>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <small>نام الزامی است ( بیشتر از 3 کلمه )</small>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-2" style="padding-right: .2rem;">
+                                <label class="mb-2" for="lastName">نام خانوادگی</label>
+                                <input class="form-control py-2" value="<%= old('lastName') %>" name="lastName" type="text" id="lastName"
+                                placeholder="قدرت‌نما"  pattern=".{3,}" required>
+                                <div class="valid-feedback">
+                                    <small>بسیار عالی !</small>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <small>نام خانوادگی الزامی است ( بیشتر از 3 کلمه )</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col mb-2">
+                            <label class="mb-2" for="email">ایمیل</label>
+                            <input class="form-control py-2"  value="<%= old('email') %>" name="email" type="email" id="email" placeholder="AmirhosseinGhodratnemaWork@gmail.com" pattern=".{5,}" required>
+                            <div class="valid-feedback">
+                                <small>بسیار عالی !</small>
+                            </div>
+                            <div class="invalid-feedback">
+                                <small>ایمیل صحیح نیست !</small>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label class="mb-2" for="number">موبایل</label>
+                            <input class="form-control py-2" value="<%= old('number') %>" name="number" type="text" id="number"
+                                pattern=".{11,11}" required placeholder="09390000000">
+                                <div class="valid-feedback">
+                                    <small>بسیار عالی !</small>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <small>شماره موبایل 11 رقم میباشد !</small>
+                                </div>
+                        </div>
+                        
+
+                        <div class="col">
+                            <label class="mb-2" for="password">پسورد</label>
+                            <input class="form-control py-2" value="<%= old('password') %>" name="password" type="password" id="password"
+                                pattern=".{9,}" required>
+                                <div class="valid-feedback">
+                                    <small>بسیار عالی !</small>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <small>پسورد الزامی است !</small>
+                                </div>
+                        </div>
+
+                        <div class="col mt-3">
+                            <%- captcha %>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="col-12 my-3">
+                        <button class="btn btn-primary" type="submit">ورود</button>
+                        <a href="/auth/google" class="btn btn-danger">ورود با گوگل</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+
+

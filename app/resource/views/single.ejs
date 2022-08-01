@@ -1,0 +1,264 @@
+<div style="height: 11.6vh;"></div>
+
+<div class="container mt-4 mb-5">
+    <%- include(viewPath('resource/views/global/errors.ejs')) %>
+
+    <div class="row">
+        <div>
+            <h1>آموزش <%= course.title %> </h1>
+            <p class="text-secondary mt-3">توسط <a href="#">امیرحسین قدرت‌نما</a> در تاریخ 1400/02/25</p>
+        </div>
+
+
+       
+
+
+        <div class="col-xl-9 singleDescription">
+            <hr class="text-secondary mt-0" />
+            <%- course.description %>
+            <!-- <p class="justify singleDescription"></p> -->
+
+
+
+
+
+            <% if (auth.check) { %>
+                <% if (checkRegisterClass) { %>
+                    <div class="alert alert-success" role="alert">
+                        شما در این کلاس ثبت نام شده اید.
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-danger" role="alert">
+                        شما در این کلاس ثبت نام نکرده اید.
+                    </div>
+                <% } %> 
+            <% } else {  %>
+                <div class="alert alert-danger" role="alert">
+                    لطفا وارد اکانت خود شوید.
+                </div>
+            <% } %> 
+
+
+
+            <hr class="text-secondary" />
+            <% if (auth.check) { %>
+                <% if (course.type == 'cash') { %>
+                    <% if (auth.user.checkLearning(course.id)) { %>
+                        <div class="alert alert-success" role="alert">
+                            تست تست تست تست تست تست 
+                        </div>
+                    <% } else { %>
+                        <div class="alert alert-danger" role="alert">
+                            تست تست تست تست تست تست 
+
+                        </div>
+                    <% } %> 
+
+                <% } else if(course.type == 'vip') {  %>
+                    <% if (auth.user.isVip()) { %>
+                        <div class="alert alert-success" role="alert">
+                            تست تست تست تست تست تست 
+
+                        </div>
+                    <% } else { %>
+                        <div class="alert alert-danger" role="alert">
+                            تست تست تست تست تست تست 
+                        </div>
+                    <% } %> 
+
+                <% } else { %>
+                    <div class="alert alert-success" role="alert">
+                        تست تست تست تست تست تست 
+                    </div>
+                <% } %> 
+
+            <% } else { %>
+                <div class="alert alert-danger" role="alert">
+                    لطفا وارد اکانت خود شوید.
+                </div>
+            <% } %> 
+
+            <!-- <h4>قسمت‌های دوره</h4> -->
+            <!-- <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th class="col-2">شماره قسمت</th>
+                        <th class="col">عنوان قسمت</th>
+                        <th class="col">زمان قسمت</th>
+                        <th class="col">دانلود</th>
+                        <th class="col">دانلود</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%# if (course.episodes.length > 0) { %>
+                        <%# course.episodes.forEach(episode => { %>
+                            <tr>
+                                <th><%#= episode.number %> </th>
+                                <td><%#= episode.title %> </td>
+                                <td><%#= episode.time %> </td>
+                                <td><%#= episode.downloadCount %> </td>
+                                <td><a href="<%#= episode.donwload(req) %>">دانلود</a></td>
+                            </tr>
+                        <%# })  %>
+                    <%# } else { %>
+                        <tr class="bg-light">
+                            <th colspan="12" class="text-center fw-bold p-3">موردی یافت نشد</th>
+                        </tr>
+                    <%# } %> 
+                </tbody>
+            </table> -->
+
+            <%- include(viewPath('resource/views/global/comments.ejs'),  {subject : course})  %> 
+       
+            <hr class="text-secondary" />
+            <%  course.comment.forEach(item => { %>
+                <div class="d-flex align-items-start border rounded-1 mb-3">
+                    <div class="d-flex flex-column w-100 m-4">
+                        <div class="d-flex align-items-start">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 60px;" alt="Avatar" />
+                            <div class="w-100 justify mr-3">
+                                <h5 class="mr-3 fw-bold"><%= item.user.name + ' ' + item.user.lastName %></h5>
+                                <p class="mr-3"><%= item.description %></p>
+                                    <% if (auth.check) { %>
+                                        <button type="button" class="btn btn-primary btn-sm mt-3 border-0" data-toggle="modal" data-parent="<%= item.id %>" data-target="#exampleModal">پاسخ</button>
+                                    <% } %>
+
+                            </div>
+                        </div>
+
+                        <% if (item.comments.length > 0) { %>
+                            <% item.comments.forEach(child => { %>
+                                <hr class="text-secondary" />
+                                <div class="d-flex align-items-start justify-content-end mt-3">
+                                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3"
+                                        style="width: 60px;" alt="Avatar" />
+                                    <div class=" justify mr-3" style="width: 80%;">
+                                        <h5 class="mr-3 fw-bold"><%= child.user.name + ' ' + child.user.lastName %> </h5>
+                                        <p class="mr-3"><%= child.description %> </p>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } %>
+
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        
+        <div class="col-xl-3">
+            <div class="card w-100">
+
+
+
+                <% if (auth.check) { %>
+                    <% if (course.type == 'cash') { %>
+                        <% if (auth.user.checkLearning(course.id)) { %>
+                            <div class="card-body py-2 px-2">
+                                <input type="hidden" name="course" value="<%= course.id %>">
+                                <p class="justify">شما این دوره را خریداری‌ کرده‌اید</p>
+                            </form>
+                        </div>
+                           
+                        <% } else { %>
+                            <div class="card-body py-2 px-2">
+                                <form action="/course/payment" method="post">
+                                    <input type="hidden" name="course" value="<%= course.id %>">
+                                    <p class="justify">برای مشاهده این دوه باید آن را به مبلغ <%= course.price %> تومان خریداری کنید </p>
+                                    <button class="btn btn-primary btn-sm">ورود</button>
+                                </form>
+                            </div>
+                        <% } %> 
+    
+                    <% } else if(course.type == 'vip') {  %>
+                        <% if (auth.user.isVip()) { %>
+                         
+                            <div class="card">
+                                <div class="card-body py-2 px-2">
+                                    <p class="justify">شما عضو ویژه هستید بنا براین میتوانید از این دوره استفاده کنید.</p>
+                                    <a class="btn btn-primary btn-sm" href="/auth/login">ورود</a>
+                                </div>
+                           </div>
+
+
+                        <% } else { %>
+                       
+                            <div class="card-body py-2 px-2">
+                                    <input type="hidden" name="course" value="<%= course.id %> ">
+                                    <p class="justify">برای مشاهده دوه از عضویت ویژه استفاده کنید.</p>
+                                    <a class="btn btn-sm btn-primary" href="#">تهیه عضویت ویژه</a>
+                                </form>
+                            </div>
+
+                        <% } %> 
+    
+                    <% } else { %>
+                   
+
+                        <div class="card">
+                            <div class="card-body py-2 px-2">
+                                <p class="justify">دوره بهصورت رایگان در دسترس شما قرار دارد.</p>
+                            </div>
+                       </div>
+
+                    <% } %> 
+    
+                <% } else { %>
+                   <div class="card">
+                        <div class="card-body py-2 px-2">
+                            <p class="justify">برای مشاهده این دوره باید وارد اکانت خود شوید.</p>
+                            <a class="btn btn-primary btn-sm" href="/auth/login">ورود</a>
+                        </div>
+                   </div>
+                <% } %> 
+
+
+
+
+
+
+               
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header fw-bold">
+                    جستوجو
+                </div>
+                <div class="card-body">
+                    <div class="input-group border rounded-3 overflow-hidden">
+                        <input type="text" class="form-control border-0" id="inlineFormInputGroupUsername"
+                            placeholder="دنبال چی میگردی؟">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-secondary" type="submit">جستوجو</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header fw-bold">
+                    دسته
+                </div>
+                <div class="card-body">
+                    <ul class="row p-0">
+                        <li class="col-6"><a href="#">Bootstrap</a></li>
+                        <li class="col-6"><a href="#">React</a></li>
+                        <li class="col-6"><a href="#">Frotn-end</a></li>
+                        <li class="col-6"><a href="#">Css</a></li>
+                        <li class="col-6"><a href="#">Html</a></li>
+                        <li class="col-6"><a href="#">Mui</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header fw-bold">
+                    جزئیات
+                </div>
+                <div class="card-body d-flex justify-content-between fw-bold">
+                    <p>بازدید‌ها : <%= course.viewCount  %></p>
+                    <p>بارگیری : <%= date(course.createdAt)  %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

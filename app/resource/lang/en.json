@@ -1,0 +1,59 @@
+{
+	"titleBanerHome": "Hello, my name is Amir Hossein",
+	"descriptionBanerHome": "I work in the field of front-end and back-end programming and I work as a freelancer.",
+	"descriptionBanerHome2": "To know how the website can help your business, contact me and I will guide you.",
+	"btnBanner": "Contact Me",
+	"btnLogin": "Login",
+	"btnRegister": "Register",
+	"btnLang": "فارسی",
+	"languageBtnGp" : {
+		"main" :"Language",
+		"en" : "انگلیسی",
+		"fa": "فارسی",
+		"fr": "فرانسوی"
+	},
+	"obgHeader": {
+		"home": "Home",
+		"courses": "Courses",
+		"interests": "Interests",
+		"weblog": "Weblog",
+		"contactMe": "contact with me"
+	},
+	"workSamples": {
+		"title": "You can see my portfolio in the link below",
+		"body": "All templates are HTML and CSS that can be customized according to your needs and you can even order your own user interface design to us so that we can design a special template for you according to your taste.",
+		"btn": "portfolio"
+	},
+	"ourServices": {
+		"title": "our services",
+		"titleBody": "What we offer",
+		"android": "Android and iOS application",
+		"androidBody": "We design Android and iOS applications with the help of Dart and Flutter.",
+		"react": "react",
+		"reactBody": "One-page web applications are designed using React.",
+		"Nodejs": "NodeJS",
+		"NodejsBody": "With the help of NodeJS engine, we will start the website.",
+		"Responsive": "NodeJS",
+		"ResponsiveBody": "Your website will be displayed in the best way in different screens.",
+		"titleResponsiveBody": "ourServices.titleResponsiveBody"
+	},
+	"template": {
+		"title": "Use these ready templates easily",
+		"btn": "Donwload now"
+	},
+	"project": {
+		"title": "Types of sites"
+	},
+	"site": {
+		"store": "Store site",
+		"storeDescription": "With a store site, you can put your business online and have a store that works for you 24 hours a day",
+		"single": "Single page site",
+		"singleDescription": "Single-page sites are more of an introduction aspect and are used to better understand your work or profession and are very affordable.",
+		"management": "Management",
+		"managementDescription": "Management sites give you the ability to save your work information and display or process them according to your needs",
+		"company": "Company",
+		"companyDescription": "Company sites need more explanations due to the work of different parts of the factory, so it needs several pages"
+	},
+	"btnLangFa": "btnLangFa",
+	"lang": "lang"
+}

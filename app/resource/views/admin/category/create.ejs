@@ -1,0 +1,38 @@
+<div>
+    <div>
+        <h4 class="mb-4">ایجاد دوره جدید</h4>
+    </div>
+    <hr />
+
+    <%- include(viewPath('resource/views/global/errors.ejs')) %>
+        <form class="needs-validation" action="/admin/category/create" method="POST" novalidate>
+            <div class="form-row">
+                <div class="col-6 mb-2">
+                    <label class="mb-2" for="name">نام دسته</label>
+                    <input type="text" class="form-control py-2" value="<%= old('name') %>" name="name" id="name"
+                        placeholder="نام یا عنوان قسمت را وارد کنید." required pattern=".{5,}">
+                    <div class="valid-feedback">
+                        <small> بسیار عالی!</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>بیشتر از 4 کلمه !</small>
+                    </div>
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="parent">انتخاب دوره</label>
+                    <select class="form-control mt-2" name="parent" id="parent">
+                        <option value="none">پدر دسته</option>
+                        <% category.forEach(item => { %>
+                            <option value="<%= item.id %>"><%= item.name %></option>
+                        <% }) %> 
+                    </select>
+                </div>
+
+
+
+            <div class="col-12 my-3 p-0">
+                <button class="btn btn-primary" type="submit">ثبت</button>
+            </div>
+        </form>
+</div>

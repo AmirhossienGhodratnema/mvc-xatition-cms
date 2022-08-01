@@ -1,0 +1,84 @@
+<div>
+    <div>
+        <h4 class="mb-4">ویرایش کلاس</h4>
+    </div>
+    <hr />
+
+    <%- include(viewPath('resource/views/global/errors.ejs')) %>
+        <form class="needs-validation" action="/admin/courses/update/<%= course.id %>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
+            <div class="form-row">
+                <div class="col-6 mb-2">
+                    <label class="mb-2" for="title">نام کلاس</label>
+                    <input type="text" class="form-control py-2" value="<%= old('title' , course.title) %>" name="title" id="title"
+                        placeholder="نام کلاس را وارد کنید." required pattern=".{5,}">
+                    <div class="valid-feedback">
+                        <small> بسیار عالی!</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>بیشتر از 4 کلمه !</small>
+                    </div>
+                </div>
+
+                <input  name="type" value="cash" id="type" type="hidden">
+                
+                <!-- <div class="form-group col-6">
+                    <label for="coursetype">نوع دوره</label>
+                    <select class="form-control mt-2" name="type" id="type">
+                      <option value="vip" <%# old('type') == 'vip' ? 'selected' : '' %>>نقدی</option>
+                      <option value="cash" <%# old('type') == 'cash' ? 'selected' : '' %>>ویژه</option>
+                      <option value="free" <%# old('type') == 'free' ? 'selected' : '' %>>رایگان</option>
+                    </select>
+                </div> -->
+
+                <div class="col-6">
+                    <label class="mb-2" for="images">افزودن تصویر</label>
+                    <input type="file" class="form-control py-2" value="<%= old('images', course.thumbnail) %>" name="images" id="images"
+                         placeholder="تایپ دوره را مشخص کنید">
+                </div>
+
+                <div class="col-6">
+                    <label class="mb-2" for="tags">تگ</label>
+                    <input type="text" class="form-control py-2" value="<%= old('tags',  course.tags) %>" name="tags" id="tags" required
+                        placeholder="یک تگ برای دوره انتخاب کنید.">
+                    <div class="valid-feedback">
+                        <small>بسیار عالی !</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+
+             
+                <div class="col-6">
+                    <label class="mb-2" for="price">شهریه</label>
+                    <input type="text" class="form-control py-2" value="<%= old('price',  course.price) %>" name="price" id="price"
+                        required placeholder="هزینه شهریه برای هر ماه.">
+                    <div class="valid-feedback">
+                        <small>بسیار عالی !</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <label class="mb-2" for="description">متن دوره</label>
+                    <textarea  id="description" class="form-control py-2"  name="description" required
+                        rows="10"><%= old('description', course.description) %></textarea>
+                    <div class="valid-feedback">
+                        <small>بسیار عالی !</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 my-3 p-0">
+                <button class="btn btn-warning" type="submit">ثبت</button>
+            </div>
+    
+
+        </form>
+</div>

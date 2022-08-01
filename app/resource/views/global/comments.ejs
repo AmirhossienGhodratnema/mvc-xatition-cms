@@ -1,0 +1,65 @@
+<% if (auth.check) { %>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">پاسخ به </h5>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form role="form" action="/comment" method="post">
+                    <div class="modal-body">
+                        <div class="card-body">
+                                <input type="hidden" name="parent" value="">
+                                <input type="hidden" name="<%= subject.constructor.modelName.toLowerCase() %>" value="<%= course.id %>">
+                                <textarea class="form-control py-2" name="description" id="description" required rows="5"></textarea>
+                                <div class="valid-feedback">
+                                    <small>بسیار عالی !</small>
+                                </div>
+                                <div class="invalid-feedback">
+                                    <small>الزامی !</small>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">ارسال</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header fw-bold">
+            ثبت نطر :
+        </div>
+        <div class="card-body">
+            <form role="form" action="/comment" method="post">
+                <div class="">
+                    <input type="hidden" name="<%= subject.constructor.modelName.toLowerCase() %>" value="<%= course.id %>">
+                    <textarea class="form-control py-2" name="description" id="description" required rows="5"></textarea>
+                    <div class="valid-feedback">
+                        <small>بسیار عالی !</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-sm mt-3" type="submit">ثبت</button>
+            </form>
+        </div>
+    </div>
+<% } %>
+
+
+
+<script>
+    $('#exampleModal').on('shown.bs.modal', function (e) {
+        let button = $(e.relatedTarget)
+        let parentId = button.data('parent');
+        let modal = $(this);
+        modal.find('[name="parent"]').val(parentId)
+    })
+</script>

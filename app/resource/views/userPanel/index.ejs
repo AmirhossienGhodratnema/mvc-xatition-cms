@@ -1,0 +1,67 @@
+
+
+<div style="height: 11.6vh;"></div>
+
+<div class="container bg-light  rounded-2">
+    
+    <div class="bg-light w-100 p-2 rounded-2">
+        <h4 class="fw-bold text-center">اطلاعات کاربر</h4 class="">
+        <p class="fw-bold p-0">کاربر : <%= user.lastName ? user.name + ' ' + user.lastName : user.name %> </p>
+        <p class="fw-bold p-0">ایمیل : <%= user.email %> </p>
+        <p class="fw-bold p-0">موبایل : <%= user.number %> </p>
+        <p class="fw-bold p-0">تاریخ عضویت : <%= getTime(user.createdAt) %> </p>
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-xl-2 rounded-1 bg-secondary text-black">
+            <ul class="px-2 py-1 text-white ">
+                <% episode.forEach(item => { %>
+                    <li class="d-flex align-items-center my-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                            height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                        </svg>
+                        <a href="/user-panel/class-analyze/<%= item.course.id %>" class="text-white text-decoration-none mx-2"><%= item.course.title %> </a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+        <div class="col-xl-10">
+            <div class="card-body">
+                <div class="yinyang"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/chart-main.js"></script>
+<script>
+    var success_chart = document.getElementById('Full_chart');
+    var My_success_chart = new Chart(success_chart, {
+        type: 'polarArea',
+        data: {
+            labels: <%- JSON.stringify(date) %>,
+            datasets: [{
+                label: 'نمودار خرید',
+                data: <%- JSON.stringify(number) %>,
+                backgroundColor: "rgba(0,0,0,.5)",
+                borderWidth: 1,
+                tension: .5
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            fill: true,
+            borderColor: 'black',
+        }
+    });
+</script>

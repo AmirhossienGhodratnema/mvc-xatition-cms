@@ -1,0 +1,95 @@
+<div>
+    <div>
+        <h4 class="mb-4">اجازه دسترسی جدید</h4>
+    </div>
+    <hr/>
+
+        <%- include(viewPath('resource/views/global/errors.ejs'))  %> 
+    <form class="needs-validation" action="/admin/roles/create" method="POST" novalidate>
+        <div class="form-row">
+            <div class="col-4 mb-2">
+                <label class="mb-2" for="name">عنوان سطح</label>
+                <input type="text" class="form-control py-2" pattern=".{3,}" value="<%= old('name') %>" name="name" id="name"
+                    placeholder="Site-manager" required>
+                <div class="valid-feedback">
+                    <small> بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>نام الزامی است ( بیشتراز دو کارکتر )</small>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label class="mb-2" for="lable">توضیح</label>
+                <input type="text" class="form-control py-2" value="<%= old('lable') %>" name="lable"
+                    id="lable" pattern=".{3,}" required placeholder="مدیر‌کل">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>لیبل الزامی است ( بیشتراز دو کارکتر )</small>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group col-4 " style="direction: rtl;" >
+                <label for="permission" style="margin-bottom: .5rem;">سطح دسترسی</label>
+                <select id="permission" name="permission" class="form-control form-control-chosen" data-placeholder="انتخاب کنید" multiple>
+                    <% permissions.forEach(item => { %>
+                        <option value="<%= item.id %>" <%= old('permissions').indexOf(item.id) !== -1 ?'selected' : '' %> ><%= item.lable %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+
+<!-- 
+
+            <div class="col-4">
+                <label class="mb-2" for="date">تاریخ</label>
+                <input type="text" class="example1 form-control py-2" value="<%# old('date') %>" name="date"
+                id="date" required placeholder="تاریخ تولد"/>
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label class="mb-2" for="number">تعداد / وزن</label>
+                <input type="text" class="form-control py-2" value="<%# old('number') %>" name="number"
+                    id="number" required placeholder="تعداد یا وزن محصول">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <label class="mb-2" for="nameStore">نام فروشگاه</label>
+                <input type="text" class="form-control py-2" value="<%# old('nameStore') %>" name="nameStore"
+                    id="nameStore" required placeholder="نام فروشگاهی که از ان خرید کردید">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+        </div> -->
+
+
+        <div class="col-12 my-3 p-0">
+            <button class="btn btn-primary" type="submit">ثبت</button>
+        </div>
+    </form>
+</div>
+
+

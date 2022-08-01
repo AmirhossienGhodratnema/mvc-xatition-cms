@@ -1,0 +1,48 @@
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f5f5f5;">
+    <div class="col-xl-4 col-lg-4 col-md-5 col-sm-10 col-11">
+        <div class="card mb-5">
+            <div class="card-header">
+                <h5 class="text-center">فراموشی رمز عبور</h5>
+            </div>
+            <div class="card-body">
+                <%- include(viewPath('resource/views/global/errors.ejs'))  %> 
+               <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center  position-relative" style="width: 24%;">
+                    <svg class="colorLogo" xmlns="http://www.w3.org/2000/svg" width="85" height="85" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
+                        <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+
+                    <svg  class="colorLogo position-absolute" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+                        <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"/>
+                    </svg>
+                </div>
+               </div>
+
+                <form class="needs-validation" action="/auth/password-reset" method="POST" novalidate>
+                    <div class="form-row">
+                        <div class="col mb-2">
+                            <label class="mb-2" for="email">ایمیل</label>
+                            <input type="email" class="form-control py-2" value="<%= old('email') %>" name="email" id="email" placeholder="amirhosseinghodratnemaWork@gmail.com" required
+                                pattern=".{5,}">
+                            <div class="valid-feedback">
+                                <small> بسیار عالی!</small>
+                            </div>
+                            <div class="invalid-feedback">
+                                <small>ایمیل را به درستی وارد کنید !</small>
+                            </div>
+                        </div>
+                    </div>
+<!--                     
+                    <div>
+                        <%# captcha %> 
+                    </div> -->
+
+                    <div class="col-12 my-3">
+                        <button class="btn btn-primary">ارسال</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

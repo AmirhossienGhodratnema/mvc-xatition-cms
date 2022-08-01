@@ -1,0 +1,52 @@
+<div>
+    <div>
+        <h4 class="mb-4">ویرایش</h4>
+    </div>
+    <hr />
+
+    <%- include(viewPath('resource/views/global/errors.ejs')) %>
+        <form class="needs-validation" action="/admin/roles/update/<%= role.id %>?_method=PUT" method="POST" novalidate>
+            <div class="form-row">
+                <div class="col-4 mb-2">
+                    <label class="mb-2" for="name">نام</label>
+                    <input type="text" class="form-control py-2" value="<%= old('name', role.name) %>" name="name"
+                        id="name" placeholder="محصول خریداری شده یا عنوان ان را وارد کنید" required>
+                    <div class="valid-feedback">
+                        <small> بسیار عالی!</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <label class="mb-2" for="lable">لیبل</label>
+                    <input type="text" class="form-control py-2" value="<%= old('lable', role.lable) %>" name="lable"
+                        id="lable" required placeholder="قیمت برحسب ( تومان )">
+                    <div class="valid-feedback">
+                        <small>بسیار عالی !</small>
+                    </div>
+                    <div class="invalid-feedback">
+                        <small>الزامی !</small>
+                    </div>
+                </div>
+
+                <div class="form-group col-4 " style="direction: rtl;" >
+                    <label for="permission" style="margin-bottom: .5rem;">سطح دسترسی</label>
+                    <select id="permission" name="permission" class="form-control form-control-chosen" data-placeholder="انتخاب کنید" multiple>
+                        <% permissions.forEach(item => { %>
+                            <option value="<%= item.id %>" <%= old('permissions', role.permission).indexOf(item.id) !== -1 ?'selected' : '' %> ><%= item.lable %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-12 my-3 p-0">
+                <button class="btn btn-warning" type="submit">ثبت</button>
+            </div>
+        </form>
+</div>

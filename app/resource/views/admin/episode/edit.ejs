@@ -1,0 +1,41 @@
+<div>
+    <div>
+        <h4 class="mb-4">ایجاد دوره جدید</h4>
+    </div>
+    <hr />
+
+    <%- include(viewPath('resource/views/global/errors.ejs')) %>
+        <form class="needs-validation" action="/admin/episodes/update/<%= episode.id %>?_method=PUT" method="POST" novalidate>
+            <div class="form-row">
+
+                
+                
+                <div class="form-group col-6">
+                    <label for="user">کاربر</label>
+                    <select class="form-control mt-2" name="user" id="user">
+                        <% users.forEach(user => { %>
+                            <option value="<%= old('user' , user.id)%>" <%= user.id == episode.user.id ? 'selected' : '' %> ><%= user.lastName ? user.name + ' ' + user.lastName : user.name  %></option>
+                        <% }) %> 
+                    </select>
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="course">کلاس</label>
+                    <select class="form-control mt-2" name="course" id="course">
+                        <% courses.forEach(course => { %>
+                            <option value="<%= old('title' , course.id)%>" <%= course.id == episode.course.id ? 'selected' : '' %>> <%= course.title %>  </option>
+                        <% }) %> 
+                    </select>
+                </div>
+
+
+
+            <div class="col-12 my-3 p-0">
+                <button class="btn btn-warning" type="submit">ثبت</button>
+            </div>
+        </form>
+</div>
+
+
+
+

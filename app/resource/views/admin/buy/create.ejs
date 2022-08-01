@@ -1,0 +1,87 @@
+<div>
+    <div>
+        <h4 class="mb-4">ثبت خرید جدید</h4>
+    </div>
+    <hr/>
+
+        <%- include(viewPath('resource/views/global/errors.ejs'))  %> 
+    <form class="needs-validation" action="/admin/buy/create" method="POST" novalidate>
+        <div class="form-row">
+            <div class="col-4 mb-2">
+                <label class="mb-2" for="name">نام محصول یا عنوان</label>
+                <input type="text" class="form-control py-2" value="<%= old('name') %>" name="name" id="name"
+                    placeholder="محصول خریداری شده یا عنوان ان را وارد کنید" required>
+                <div class="valid-feedback">
+                    <small> بسیار عالی!</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>ایمیل صحیح نیست !</small>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label class="mb-2" for="price">قیمت</label>
+                <input type="text" class="form-control py-2" value="<%= old('price') %>" name="price"
+                    id="price" required placeholder="قیمت برحسب ( تومان )">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="col-4">
+                <label class="mb-2" for="date">تاریخ</label>
+                <input type="text" class="example1 form-control py-2" value="<%= old('date') %>" name="date"
+                id="date" required placeholder="تاریخ تولد"/>
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label class="mb-2" for="number">تعداد / وزن</label>
+                <input type="text" class="form-control py-2" value="<%= old('number') %>" name="number"
+                    id="number" required placeholder="تعداد یا وزن محصول">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <label class="mb-2" for="nameStore">نام فروشگاه</label>
+                <input type="text" class="form-control py-2" value="<%= old('nameStore') %>" name="nameStore"
+                    id="nameStore" required placeholder="نام فروشگاهی که از ان خرید کردید">
+                <div class="valid-feedback">
+                    <small>بسیار عالی !</small>
+                </div>
+                <div class="invalid-feedback">
+                    <small>پسورد الزامی است !</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-12 my-3 p-0">
+            <button class="btn btn-primary" type="submit">ثبت خرید</button>
+        </div>
+    </form>
+</div>
+
+

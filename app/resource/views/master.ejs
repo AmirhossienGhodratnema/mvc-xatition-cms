@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <!-- <link rel="stylesheet" href="/css/font.css"> -->
+    <% if (req.getLocale() == 'fa') { %>
+        <link rel="stylesheet" href="/css/bootstrap-rtl.css">
+        <link rel="stylesheet" href="/css/homeStyles.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <% } else if(req.getLocale() == 'en') {  %>
+        <link rel="stylesheet" href="/css/homeStyles.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <% } %> 
+
+    <title>
+        <%=title ? title : 'وبسایت' %>
+    </title>
+</head>
+<body class="">
+    <header class="bg-secondary position-fixed w-100 " style="z-index: 20; top: 0;">
+        <nav class="navbar bg-dark navbar-expand-lg navbar-dark bg-light py-3">
+            <a class="navbar-brand pr-3" href="#">Logo</a>
+            <button class="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            
+    
+      
+            <div class=" position-relative collapse navbar-collapse justify-content-center" style="font-weight:800;"
+                id="navbarSupportedContent">
+               
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-center" href="#home">خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#class">کلاس‌ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#">برنامه‌کلاسی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#">درباره‌ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#">تماس‌با‌ما</a>
+                    </li>
+                </ul>
+    
+                <%# auth.user && auth.user.email %> 
+    
+                <% if(auth.check){ %>
+                    <div class="btnAcc">
+                        <% if (auth.user && auth.user.admin) { %>
+                            <a href="/admin" class="btn btn-outline-warning btn-sm">ادمین</a>
+                        <% } %>
+                        <a href="/user-panel" class="btn btn-outline-success btn-sm">پنل کاربری</a>
+                        <a href="/logout" id="test" class="btn btn-outline-danger btn-sm">خروج</a>
+                    </div>
+                  <% } else{ %>  
+                    <div class="btnAcc">
+                        <a href="/auth/login" class="btn btn-outline-info  btn-sm">ورود</a>
+                        <a href="/auth/register" class="btn btn-info btn-sm">ثبت‌نام</a>
+                    </div>
+                 <% } %>
+            </div>
+        </nav>
+    </header>
+
+
+        <%-body%>
+
+    
+    
+</body>
+
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/persian-datepicker.min.js"></script>
+<script src="/js/persian-date.min.js"></script>
+<script src="/js/sweetalert.js"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
+
+
+
+
+
+            
+
+<% let sweetalert = req.flash('sweetalert')
+    if(sweetalert.length) {
+    let data = sweetalert[0]; %>
+    <script>
+        
+        Swal.fire({
+            title: '<%= data.title %>',
+            text: '<%= data.message %>',
+            icon: '<%= data.icon %>',
+            showConfirmButton: <%= data.button !== null ? true : false %>,
+            confirmButtonText: '<%= data.button %>',
+            timer : <%= data.button !== null ? 'null' : data.timer %>,
+        })
+    </script>
+<% } %>
+
+
+
+    
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".example1").pDatepicker();
+    });
+</script>
+
+<%- script %>
+<script>
+    $('#myCollapsible').collapse({
+        toggle: false
+    })
+
+    $('.carousel').carousel({
+        interval: 5000
+    })
+</script>
+<script src="/js/homeScript.js"></script>
+
+
+
+</html>
