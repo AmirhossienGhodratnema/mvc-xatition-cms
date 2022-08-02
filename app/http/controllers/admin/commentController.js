@@ -61,7 +61,6 @@ module.exports = new class CommentController extends controller {
                 ]
             });
             if (!comments) throw new Error('چنین دوره ای وحود ندارد');
-            // return res.json(comments);
             return res.render('admin/comment/approvedComments', { title: 'کامنت‌های تایید شده', comments })
         } catch (err) {
             next(err);

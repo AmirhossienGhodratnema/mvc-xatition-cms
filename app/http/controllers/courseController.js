@@ -23,7 +23,6 @@ module.exports = new class SingleController extends controller {
                 ]
             })
 
-
             if (!courses) throw new Error('چنین دوره ای وحود ندارد');
             return res.render('courses', { title: 'دوره‌ها', courses })
         } catch (err) {
@@ -35,39 +34,51 @@ module.exports = new class SingleController extends controller {
     // Single page course.
     async single(req, res, next) {
         try {
-            let course = await Course.findByIdAndUpdate(req.params.id, { $inc: { viewCount: 1 } }).populate([
-                {
-                    path: 'user',
-                    select: ['name', 'lastName']
-                },
-                {
-                    path: 'episodes'
-                },
-                {
-                    path: 'comment',
-                    match: { parent: null, approved: true },
-                    populate: [
-                        {
-                            path: 'user',
-                            select: ['name', 'lastName'],
-                        },
-                        {
-                            path: 'comments',
-                            match: { approved: true },
-                            populate: [
-                                {
-                                    path: 'user',
-                                    select: ['name', 'lastName'],
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ]);
+            console.log()
+            if(req.isAuthenticated()) {
+                let course = await Course.findByIdAndUpdate(req.params.id, { $inc: { viewCount: 1 } }).populate([
+                    {
+                        path: 'user',
+                        select: ['name', 'lastName']
+                    },
+                    {
+                        path: 'episodes'
+                    },
+                    {
+                        path: 'comment',
+                        match: { parent: null, approved: true },
+                        populate: [
+                            {
+                                path: 'user',
+                                select: ['name', 'lastName'],
+                            },
+                            {
+                                path: 'comments',
+                                match: { approved: true },
+                                populate: [
+                                    {
+                                        path: 'user',
+                                        select: ['name', 'lastName'],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ]);
+    
+                let checkRegisterClass = await req.user.registerClass(course.episodes, req.user.id);
+    
+                return res.render('single', { title: 'صفحه کلاس', course, checkRegisterClass });
+            }
 
-            let checkRegisterClass = await req.user.registerClass(course.episodes, req.user.id);
-
-            return res.render('single', { title: 'صفحه کلاس', course, checkRegisterClass });
+            return this.AlertAndBack(req, res, {
+                title: 'ورود به حساب کاربری',
+                icon : 'error',
+                message: 'شما ابتدا باید وارد اکانت خود شوید.',
+                button: 'تایید'
+            });
+            
+            
         } catch (err) {
             next(err);
         };

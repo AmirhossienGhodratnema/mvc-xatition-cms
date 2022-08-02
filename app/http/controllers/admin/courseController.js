@@ -47,7 +47,7 @@ module.exports = new class CourseController extends controller {
             let result = await this.ValidationData(req);
             if (result) fs.unlink(req.file.path, (err) => { })
             if (result) return this.Back(req, res);
-            let { title, type, description, tags, price, fingerImage } = req.body;
+            let { title, type, description, tags, price } = req.body;
             let images = await this.imageResize(req.file);
             const newCourse = await new Course({
                 user: req.user.id,
@@ -73,7 +73,6 @@ module.exports = new class CourseController extends controller {
     // Edit page
     async edit(req, res, next) {
         try {
-
             await this.IdMongoId(req.params.id);
             let category = await Category.find({})
             let course = await Course.findOne({ _id: req.params.id })
@@ -136,7 +135,7 @@ module.exports = new class CourseController extends controller {
         try {
             let imageInfo = await path.parse(image.path);
             let addresImage = {};
-            addresImage['orginal'] = await this.getUrlImage(image.destination, image.filename);
+            addresImage['orginal'] = await this.getUrlImage(image.path, image.filename);
             const resize = async size => {
                 let imageName = `${imageInfo.name}-${size}-${imageInfo.ext}`;
                 addresImage[size] = await this.getUrlImage(image.destination, imageName);
@@ -154,6 +153,8 @@ module.exports = new class CourseController extends controller {
 
     // Get addres image
     async getUrlImage(dir, name) {
+        console.log('dir' , dir)
+        console.log('name' , name)
         return dir + '/' + name;
     };
 

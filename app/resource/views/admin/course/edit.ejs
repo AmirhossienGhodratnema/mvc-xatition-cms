@@ -48,6 +48,10 @@
                     </div>
                 </div>
 
+
+              
+
+
              
                 <div class="col-6">
                     <label class="mb-2" for="price">شهریه</label>
@@ -61,6 +65,20 @@
                     </div>
                 </div>
 
+                <div class="col-12  my-2">
+                    <label class="mb-2" for="images">تصور بندانگشتی</label>
+                    <div class="d-flex justify-content-around">
+                        <% Object.entries(course.images).forEach(([size , image])=> { %>
+                            <div class="col-3">
+                                <div class="mr-3 mb-1">
+                                    <input type="radio" class="form-check-input" name="thumbnail" value="<%= image %>" <%= image == course.thumbnail ? 'checked' : '' %>  >
+                                    <label class="control-label"><%= size %></label>
+                                </div>
+                                <a href="<%= image %>" target="_blank"><img class="border rounded" src="<%= image %>" width="100%"></a>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
 
                 <div class="col-12">
                     <label class="mb-2" for="description">متن دوره</label>

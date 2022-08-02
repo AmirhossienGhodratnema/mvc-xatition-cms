@@ -60,6 +60,7 @@ UserSchema.methods.isVip = function () {
 
 // Check register class
 UserSchema.methods.registerClass = async function (episodes, user) {
+
     let check = false;
     await episodes.forEach(episode => {
         if (episode.user == user) check = true;
