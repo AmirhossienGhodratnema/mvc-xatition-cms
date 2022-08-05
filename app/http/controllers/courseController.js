@@ -2,11 +2,12 @@ const controller = require('app/http/controllers/controller');
 const path = require('path');
 const Course = require('./../../models/course');
 const Episode = require('./../../models/episode');
-const User = require('./../../models/user');
+const Payment = require('./../../models/payment');
 const config = require('./../../config');
 const bcrypt = require('bcrypt');
-const user = require('../../models/user');
-const res = require('express/lib/response');
+const request = require('request-promise');
+
+
 
 module.exports = new class SingleController extends controller {
 
@@ -35,7 +36,7 @@ module.exports = new class SingleController extends controller {
     async single(req, res, next) {
         try {
             console.log()
-            if(req.isAuthenticated()) {
+            if (req.isAuthenticated()) {
                 let course = await Course.findByIdAndUpdate(req.params.id, { $inc: { viewCount: 1 } }).populate([
                     {
                         path: 'user',
@@ -65,20 +66,20 @@ module.exports = new class SingleController extends controller {
                         ],
                     },
                 ]);
-    
+
                 let checkRegisterClass = await req.user.registerClass(course.episodes, req.user.id);
-    
+
                 return res.render('single', { title: 'صفحه کلاس', course, checkRegisterClass });
             }
 
             return this.AlertAndBack(req, res, {
                 title: 'ورود به حساب کاربری',
-                icon : 'error',
+                icon: 'error',
                 message: 'شما ابتدا باید وارد اکانت خود شوید.',
                 button: 'تایید'
             });
-            
-            
+
+
         } catch (err) {
             next(err);
         };
@@ -115,8 +116,29 @@ module.exports = new class SingleController extends controller {
 
 
 
+    async checkPayment(req, res, next) {
+        try {
+            if (await req.query.Status == 'OK') {
+                let payment = await Payment.findOne({restnumber : req.query.authority});
+                await payment.set({payment : true});
+                payment.save()
+                return res.render('global/payment' , {title : 'payment'})
+            }else {
+                await this.Alert(req, res, {
+                    title: 'خطا',
+                    message: 'پرداخا انجام نشد',
+                    type: 'error'
+                });
+                return res.redirect('/')
+            }
+        } catch (err) {
+            next(err)
+        }
+    }
+
+
     // Course payment
-    async payment(req, res, next) {
+    async paymentCourse(req, res, next) {
         try {
             await this.IdMongoId(req.body.course);
             let course = await Course.findById(req.body.course);
@@ -141,9 +163,46 @@ module.exports = new class SingleController extends controller {
                 return;
             };
 
-            return res.json(req.body);
+            let params = {
+                merchant_id: '833ac752-a2a8-4bd8-9e55-165dfec57888',
+                amount: course.price,
+                callback_url: 'http://localhost:3000/course/payment/check',
+                description: `بابت خرید دوره ${course.title}`,
+                email: req.user.email
+            }
+
+            let options = {
+                method: 'POST',
+                uri: 'https://api.zarinpal.com/pg/v4/payment/request.json',
+                headers: {
+                    'cash-control': 'no-cash',
+                    'content-type': 'application/json'
+                },
+                body: params,
+                json: true
+            }
+
+            request(options)
+                .then(async data => {
+                    // return res.json(data)
+                    const newPayment = await new Payment({
+                        ...req.body,
+                        user : req.user.id,
+                        course : course.id,
+                        restnumber : data.authority,
+                        price : course.price
+                    })
+                    await newPayment.save();
+                    if (data.data.code == 100) {
+                        return res.redirect(`https://www.zarinpal.com/pg/StartPay/${data.data.authority}`)
+                    }
+                })
+                .catch(err => console.log('Payment err'))
+
+            // return res.json(req.body);
         } catch (err) {
             next(err);
         }
-    }
+    };
+    
 };

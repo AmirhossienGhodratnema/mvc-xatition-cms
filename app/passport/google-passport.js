@@ -17,7 +17,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: '725915130890-mv84dla4dn85grib1fhq6o8f1td637jf.apps.googleusercontent.com',
     clientSecret: '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',
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'http://amirhosseinghodratnema.ir/auth/google/callback',
     passReqToCallback: true,
 }, async (req, token, tokenSecret, profile, done) => {
     let user = await User.findOne({ 'email': profile.emails[0].value });

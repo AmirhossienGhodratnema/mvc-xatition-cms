@@ -17,9 +17,7 @@
                 <tr class="fw-bolder text-center">
                     <div class="row">
                         <th class="col-2">نام نام‌خانوادگی</th>
-                        <th class="col-3">ایمیل</th>
                         <th class="col-2">شماه تماس</th>
-                        <th class="col-1">تاریخ تولد</th>
                         <th class="col-2">تنطیمات </th>
                     </div>
 
@@ -34,16 +32,12 @@
                             <th>
                                 <%= user.name + ' ' + user.lastName %>
                             </th>
-                            <th>
-                                <%= user.email %>
-                            </th>
+                           
                             <th>
                                 <%= user.number ? user.number : 'خالی' %>
                             </th>
 
-                            <th>
-                                <%= user.birth ? user.birth : 'خالی' %>
-                            </th>
+                           
                             <td class="d-flex justify-content-center align-items-center">
 
                                 <form action="/admin/user/adminChange/<%= user.id %> " method="POST" >
@@ -54,11 +48,11 @@
                                 <form class="btn-group p-0" action="/admin/user/distroy/<%= user.id %>?_method=DELETE"
                                     method="POST">
 
-                                    <div class="btn-group overflow-hidden  rounded-0 rounded-start" role="group"
+                                    <div class="btn-group overflow-hidden rounded-0 rounded-start" role="group"
                                         aria-label="Basic example">
                                         <a href="/admin/user/role/<%= user.id %>" class="btn  btn-sm btn-secondary">دسترسی</a>
                                         <a href="#" class="btn  btn-sm btn-secondary">ویرایش</a>
-                                        <button type="button" class="btn btn-sm btn-secondary">حذف</button>
+                                        <button type="submit" class="btn btn-sm btn-secondary">حذف</button>
                                     </div>
 
                                     <!-- <button type="submit" class="btn rounded-2 btn-sm btn-danger">حذف</button> -->

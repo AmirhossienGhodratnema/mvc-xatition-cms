@@ -2,16 +2,21 @@
 
 <div style="height: 11.6vh;"></div>
 
-<div class="container bg-light  rounded-2">
-    
+<div class="container bg-light rounded-2">
+
+
+       
+
+
     <div class="bg-light w-100 p-2 rounded-2">
-        <h4 class="fw-bold text-center">اطلاعات کاربر</h4 class="">
-        <p class="fw-bold p-0">کاربر : <%= user.lastName ? user.name + ' ' + user.lastName : user.name %> </p>
-        <p class="fw-bold p-0">ایمیل : <%= user.email %> </p>
-        <p class="fw-bold p-0">موبایل : <%= user.number %> </p>
-        <p class="fw-bold p-0">تاریخ عضویت : <%= getTime(user.createdAt) %> </p>
+        <div class="bg-light w-100 p-2 rounded-2">
+            <h4 class="fw-bold text-center">اطلاعات کاربر</h4 class="">
+            <p class="fw-bold p-0">کاربر : <%= user.lastName ? user.name + ' ' + user.lastName : user.name %> </p>
+            <p class="fw-bold p-0">ایمیل : <%= user.email %> </p>
+            <p class="fw-bold p-0">موبایل : <%= user.number %> </p>
+            <p class="fw-bold p-0">تاریخ عضویت : <%= getTime(user.createdAt) %> </p>
+        </div>
     </div>
-    
 
     <div class="row">
         <div class="col-xl-2 rounded-1 bg-secondary text-black">
@@ -22,8 +27,6 @@
                       </svg>
                     <a href="/user-panel/payment/<%= req.user.id %>" class="text-white text-decoration-none mx-2">پرداختی‌ها</a>
                 </li>
-
-
                 <% episode.forEach(item => { %>
                     <li class="d-flex align-items-center my-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -37,38 +40,22 @@
             </ul>
         </div>
         <div class="col-xl-10">
-            <div class="card-body" >
-                <!-- <div class="yinyang"></div> -->
+            <div class="card-body">
+                <% payment.forEach(item => { %>
+                    <div class=" <%= item.payment ? 'alert alert-success' : 'alert alert-danger' %> "   role="alert">
+                        <p class="fw-bold h5"><%= item.payment ? 'پرداختی با موفقیت انجام شد': 'پرداختی انجام نشد'%></p>
+                        <p>پرداختی بابت شهریه کلاس <%= item.course.title %> </p>
+                        <hr/>
+                        <div class="w-75 m-auto d-flex justify-content-around align-items-center">
+                            <small>مبلغ : <%= item.price %> ریال</small>
+                            <small>تاریخ : <%= getTime(item.createdAt) %> </small>
+                            <small><%= getJTime(item.createdAt) %></small>
+                        </div>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </div>
 </div>
 
 
-
-<script src="/js/chart-main.js"></script>
-<script>
-    var success_chart = document.getElementById('Full_chart');
-    var My_success_chart = new Chart(success_chart, {
-        type: 'polarArea',
-        data: {
-            labels: <%- JSON.stringify(date) %>,
-            datasets: [{
-                label: 'نمودار خرید',
-                data: <%- JSON.stringify(number) %>,
-                backgroundColor: "rgba(0,0,0,.5)",
-                borderWidth: 1,
-                tension: .5
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            fill: true,
-            borderColor: 'black',
-        }
-    });
-</script>

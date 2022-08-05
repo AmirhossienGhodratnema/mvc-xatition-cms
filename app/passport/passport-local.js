@@ -47,7 +47,7 @@ passport.use('local.login', new localStrategy({
     if (!user) {
         return done(null, false, req.flash('errors', 'اطلاعات وارد شده مطابقت ندارد'));
     };
-    if (!await user.comparePassword(password)) {
+    if (!await user.comparePassword(password , user)) {
         return done(null, false, req.flash('errors', 'اطلاعات وارد شده مطابقت ندارد'));
 
     }

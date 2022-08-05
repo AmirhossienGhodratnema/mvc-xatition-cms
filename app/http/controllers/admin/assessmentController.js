@@ -3,7 +3,7 @@ const Episode = require('./../../../models/episode');
 const Course = require('./../../../models/course');
 const Assessment = require('./../../../models/assessment');
 const Premission = require('./../../../models/premission');
-
+const moment = require('jalali-moment')
 
 
 
@@ -60,7 +60,7 @@ module.exports = new class AssessmentController extends controller {
                     path: 'user',
                     select: ['name', 'lastName']
                 }
-            ]);
+            ]).sort({createdAt: -1})
             return res.render('admin/assessment/create', { title: 'ارزیابی جدید', user, assessment });
         } catch (err) {
             next(err);
@@ -78,7 +78,7 @@ module.exports = new class AssessmentController extends controller {
                 if (err) req.flash('errors', 'عملیات ناموفق بود دوباره امتحان کنید');
             });
             return this.Back(req, res)
-        } catch (error) {
+        } catch (err) {
             next(err)
         };
     };

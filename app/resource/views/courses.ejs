@@ -9,12 +9,15 @@
             <div class="col-xl-3 mb-4 d-flex">
                 <div class="card w-100 overflow-hidden">
                     <div class="overflow-hidden">
-                        <img class="card-img-top p-2 animationImage" src="<%= course.thumbnail %>" alt="Card image cap">
+                        <img class="card-img-top p-2 animationImage" src="image/11.png" alt="Card image cap">
                     </div>
 
                     <div class="card-body py-1 border-top">
                         <p class="card-text pb-1 overflow-hidden justify textBodyCourse">
-                            <%= course.body %>
+                            <%= course.title %>
+                        </p>
+                        <p class="card-text pb-1 overflow-hidden justify textBodyCourse">
+                            <%- course.description %>
                         </p>
                     </div>
 

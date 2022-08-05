@@ -89,7 +89,7 @@ router.delete('/buy/distroy/:id', BuyController.distroy);
 
 
 // Show user
-router.get('/user', UserController.index);
+router.get('/user', gate.can('users'), UserController.index);
 router.get('/user/create', UserController.create);
 router.post('/user/create', RegisterValidation.handel(), UserController.store);
 router.post('/user/adminChange/:id', UserController.changeAdmin);

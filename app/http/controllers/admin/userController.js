@@ -8,6 +8,7 @@ const moment = require('jalali-moment');
 module.exports = new class UserController extends controller {
     async index(req, res, next) {
         try {
+            
             let page = req.query.page || 1;
             let users = await User.paginate({}, { page, sort: { createdAt: -1 }, limit: 20, populate: 'user' });
             return res.render('admin/users', { title: 'کاربران', users });

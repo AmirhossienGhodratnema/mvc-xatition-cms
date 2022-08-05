@@ -7,7 +7,7 @@ module.exports = new class CommentController extends controller {
     async store(req, res, next) {
         try {
             let result = await this.ValidationData(req);
-            if (result) return this.B
+            if (result) return this.Back(req, res)
             const newComment = await new Comment({
                 user: req.user.id,
                 ...req.body,

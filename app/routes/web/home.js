@@ -33,7 +33,9 @@ router.post('/comment', CommentValidation.handel(), CommentController.store);
 
 
 // Course payment
-router.post('/course/payment',IfNotAuth.handel , CourseController.payment);
+router.post('/course/payment',IfNotAuth.handel , CourseController.paymentCourse);
+router.get('/course/payment/check',IfNotAuth.handel , CourseController.checkPayment);
+
 
 
 

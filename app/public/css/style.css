@@ -82,6 +82,10 @@
     position: fixed;
 } */
 
+.mAD {
+    display: none;
+}
+
 @media (max-width: 991.98px) {
 
     .btnAcc {
@@ -127,6 +131,10 @@
         width: 100%;
         text-align: center;
         color: #8f969c;
+    }
+
+    .mAD {
+        display: block;
     }
 }
 

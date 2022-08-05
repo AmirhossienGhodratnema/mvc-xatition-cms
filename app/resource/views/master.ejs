@@ -30,11 +30,13 @@
 <body class="">
     <header class="bg-secondary position-fixed w-100 " style="z-index: 20; top: 0;">
         <nav class="navbar bg-dark navbar-expand-lg navbar-dark bg-light py-3">
-            <a class="navbar-brand pr-3" href="#">Logo</a>
             <button class="navbar-toggler mx-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand " style="margin-left: .5rem; width: 5rem;" href="#">
+                <img class="w-100" src="image/1XAITIEN.png" alt="">
+            </a>
     
             <div class=" position-relative collapse navbar-collapse justify-content-center" style="font-weight:800;"
                 id="navbarSupportedContent">
@@ -47,7 +49,7 @@
                         <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#class': '/#class' %>">کلاس‌ها</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#calendar': '/#calendar' %>">برنامه‌کلاسی</a>
+                        <a class="nav-link text-center" href="<%= req.originalUrl == '/' ? '#calendar' : '/#calendar' %>">برنامه‌کلاسی</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-center" href="#">درباره‌ما</a>
@@ -57,8 +59,8 @@
                     </li>
                 </ul>
     
-                <%# auth.user && auth.user.email %> 
-    
+               
+          
                 <% if(auth.check){ %>
                     <div class="btnAcc">
                         <% if (auth.user && auth.user.admin) { %>
@@ -98,7 +100,9 @@
 <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
 
-
+<script>
+    console.log('test' ,  new persianDate([1396,6,17]).format('dddd'))
+</script>
 
 
 

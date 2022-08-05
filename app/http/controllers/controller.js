@@ -107,7 +107,7 @@ module.exports = class Csontroller {
 
 
     AlertAndBack(req, res, data) {
-        this.Alert(req,data);
+        this.Alert(req, data);
         this.Back(req, res);
     }
 };

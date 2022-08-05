@@ -17,7 +17,7 @@ module.exports = new class LoginController extends Controller {
     // Proccess validation and loign user
     async LoginProccess(req, res, next) {
         try {
-            await this.RecaptchaValidation(req, res);
+            // await this.RecaptchaValidation(req, res);
             let resutl = await this.ValidationData(req);
             if (resutl) return this.Back(req, res);
             await this.login(req, res, next);

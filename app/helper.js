@@ -22,7 +22,8 @@ module.exports = class Helper {
             old: this.old,
             req: this.req,
             date: this.date,
-            getTime : this.getTime
+            getTime : this.getTime,
+            getJTime : this.getJTime
         };
     };
 
@@ -61,5 +62,9 @@ module.exports = class Helper {
 
     getTime(time){
         return moment(time).format('YYYY/MM/DD');
+    }
+
+    getJTime(item) {
+        return moment().calendar();
     }
 }

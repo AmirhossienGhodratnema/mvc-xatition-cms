@@ -37,7 +37,7 @@ UserSchema.plugin(mongoosePaginate);
 
 // Save hash password
 UserSchema.pre('save', function (next) {
-    bcrypt.hash(this.password, bcrypt.genSaltSync(15), (err, hash) => {
+    bcrypt.hash(this.password, bcrypt.genSaltSync(10), (err, hash) => {
         if (err) console.log('Error for hashing password register user ...!');
         this.password = hash;
         next();
@@ -46,8 +46,8 @@ UserSchema.pre('save', function (next) {
 
 
 // Compare password login
-UserSchema.methods.comparePassword = async function (password) {
-    let pass = await bcrypt.compareSync(password, this.password);
+UserSchema.methods.comparePassword = async function (password , user) {
+    let pass = await bcrypt.compareSync(password, user.password);
     return pass;
 }
 
