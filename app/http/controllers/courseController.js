@@ -118,12 +118,13 @@ module.exports = new class SingleController extends controller {
 
     async checkPayment(req, res, next) {
         try {
-            if (await req.query.Status == 'OK') {
-                let payment = await Payment.findOne({restnumber : req.query.authority});
-                await payment.set({payment : true});
-                payment.save()
-                return res.render('global/payment' , {title : 'payment'})
-            }else {
+            let Qpay = await req.query.Status;
+            if (Qpay == 'OK') {
+                let payment = await Payment.findOne({ restnumber: req.query.authority });
+                await payment.set({ payment: true });
+                await payment.save()
+                return res.render('global/payment', { title: 'payment' })
+            } else {
                 await this.Alert(req, res, {
                     title: 'خطا',
                     message: 'پرداخا انجام نشد',
@@ -166,7 +167,7 @@ module.exports = new class SingleController extends controller {
             let params = {
                 merchant_id: '833ac752-a2a8-4bd8-9e55-165dfec57888',
                 amount: course.price,
-                callback_url: 'http://localhost:3000/course/payment/check',
+                callback_url: 'http://amirhosseinghodratnema.ir/course/payment/check',
                 description: `بابت خرید دوره ${course.title}`,
                 email: req.user.email
             }
@@ -187,10 +188,10 @@ module.exports = new class SingleController extends controller {
                     // return res.json(data)
                     const newPayment = await new Payment({
                         ...req.body,
-                        user : req.user.id,
-                        course : course.id,
-                        restnumber : data.authority,
-                        price : course.price
+                        user: req.user.id,
+                        course: course.id,
+                        restnumber: data.authority,
+                        price: course.price
                     })
                     await newPayment.save();
                     if (data.data.code == 100) {
@@ -204,5 +205,5 @@ module.exports = new class SingleController extends controller {
             next(err);
         }
     };
-    
+
 };
