@@ -89,6 +89,7 @@ module.exports = new class UserPanelController extends controller {
                     select : ['name' , 'lastName']
                 }
             ]).sort({ createdAt: -1 });
+            // return res.json(payment)
             return res.render('userPanel/payments', { title: 'پرداختی‌ها', payment, episode })
         } catch (err) {
             next(err);

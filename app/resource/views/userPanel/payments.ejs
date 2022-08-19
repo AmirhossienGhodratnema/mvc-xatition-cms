@@ -42,8 +42,7 @@
         <div class="col-xl-10">
             <div class="card-body">
                 <% payment.forEach(item => { %>
-                    <%= item.payment %> 
-                    <div class=" <%= item.payment ? 'alert alert-success' : 'alert alert-danger' %>"   role="alert">
+                    <div class=" <%= item.payment ? 'alert alert-success' : 'alert alert-danger' %>" role="alert">
                         <p class="fw-bold h5"><%= item.payment ? 'پرداختی با موفقیت انجام شد': 'پرداختی انجام نشد'%></p>
                         <p>پرداختی بابت شهریه کلاس <%= item.course.title %> </p>
                         <hr/>

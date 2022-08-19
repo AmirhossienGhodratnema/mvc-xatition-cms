@@ -22,8 +22,8 @@ module.exports = class Helper {
             old: this.old,
             req: this.req,
             date: this.date,
-            getTime : this.getTime,
-            getJTime : this.getJTime
+            getTime: this.getTime,
+            getJTime: this.getJTime
         };
     };
 
@@ -57,14 +57,14 @@ module.exports = class Helper {
 
     date(time) {
         // var d = new persianDate([1391]);  
-        return moment(time).startOf('hour').fromNow(); 
+        return moment(time).startOf('hour').fromNow();
     }
 
-    getTime(time){
+    getTime(time) {
         return moment(time).format('YYYY/MM/DD');
     }
 
-    getJTime(item) {
-        return moment().calendar();
+    getJTime(time) {
+        return moment(time).format('YYYY/M/D')
     }
 }

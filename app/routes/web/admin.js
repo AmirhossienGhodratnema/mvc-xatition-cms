@@ -20,6 +20,7 @@ const CommentController = require('../../http/controllers/admin/commentControlle
 const CategoryController = require('../../http/controllers/admin/categoryController');
 const RoleController = require('../../http/controllers/admin/roleController');
 const AssessmentController = require('../../http/controllers/admin/assessmentController');
+const PaymentController = require('../../http/controllers/admin/paymentController');
 
 
 // Validations
@@ -71,7 +72,7 @@ router.delete('/comments/distroy/:id', CommentController.distroy);
 
 
 // Category
-router.get('/category',gate.can('categories'), CategoryController.index);
+router.get('/category', gate.can('categories'), CategoryController.index);
 router.get('/category/create', CategoryController.create);
 router.get('/category/edit/:id', CategoryController.edit);
 router.post('/category/create', CategoryValidation.handel(), CategoryController.store);
@@ -117,13 +118,19 @@ router.delete('/roles/distroy/:id', RoleController.distroy);
 
 
 // Assessment
-router.get('/assessment',gate.can('assessment'), AssessmentController.index);
+router.get('/assessment', gate.can('assessment'), AssessmentController.index);
 router.get('/assessment/create/:id', AssessmentController.create);
 router.get('/assessment/indexSingle/:id', AssessmentController.indexSingle);
 router.get('/assessment/edit/:id', AssessmentController.edit);
 router.post('/assessment/create', AssessmentValidation.handel(), AssessmentController.store);
 router.put('/assessment/update/:id', AssessmentValidation.handel(), AssessmentController.update);
 router.delete('/assessment/distroy/:id', AssessmentController.distroy);
+
+
+// Payment 
+router.get('/payments', PaymentController.index);
+
+
 
 
 router.post('/upload-image', upload.single('upload'), AdminController.uploadImage);

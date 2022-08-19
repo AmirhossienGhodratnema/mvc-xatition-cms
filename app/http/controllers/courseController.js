@@ -118,10 +118,11 @@ module.exports = new class SingleController extends controller {
 
     async checkPayment(req, res, next) {
         try {
-            let Qpay = await req.query.Status;
-            if (Qpay == 'OK') {
-                let payment = await Payment.findOne({ restnumber: req.query.authority });
-                await payment.set({ payment: true });
+            if (req.query.Status == 'OK') {
+                // let payment = await Payment.updateOne({ restnumber: req.query.authority }, { $set: { payment: true } });
+                let payment = await Payment.findOne({ restnumber: req.query.Authority });
+                console.log('pauemnt check ' , req.query.Authority)
+                await payment.set({ payment: true })
                 await payment.save()
                 return res.render('global/payment', { title: 'payment' })
             } else {
@@ -185,18 +186,17 @@ module.exports = new class SingleController extends controller {
 
             request(options)
                 .then(async data => {
-                    // return res.json(data)
                     const newPayment = await new Payment({
-                        ...req.body,
                         user: req.user.id,
                         course: course.id,
-                        restnumber: data.authority,
-                        price: course.price
-                    })
+                        price: course.price,
+                        restnumber: data.data.authority,
+                    });
+
                     await newPayment.save();
                     if (data.data.code == 100) {
                         return res.redirect(`https://www.zarinpal.com/pg/StartPay/${data.data.authority}`)
-                    }
+                    };
                 })
                 .catch(err => console.log('Payment err'))
 
