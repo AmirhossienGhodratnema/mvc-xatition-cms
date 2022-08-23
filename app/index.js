@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const https = require('https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -13,6 +14,7 @@ const passport = require('passport');
 const expressLayouts = require('express-ejs-layouts');
 const Helper = require('./helper');
 const rememberLogin = require('./http/middleware/rememberLogin');
+const fs = require('fs');
 const methodOverride = require('method-override');
 const gate = require('./gate');
 const i18n = require('i18n');
@@ -25,9 +27,18 @@ module.exports = class Application {
         this.setRouters();
     }
 
+
+
     setupExpress() {
-        const server = http.createServer(app);
-        server.listen(3000, () => console.log('Listening on port 3000'));
+        let options = {
+            key: fs.readFileSync('privateKey.key'),
+            cert: fs.readFileSync('certificate.crt'),
+        };
+        const server = https.createServer(options, app);
+        server.listen(8000, () => console.log('Listening on port 3000'));
+
+        // const server2 = https.createServer(options, app);
+        // server.listen(8000, () => console.log('Listening on port 8000'));
     }
 
     setMongoConnection() {
@@ -68,8 +79,6 @@ module.exports = class Application {
             next()
         })
         app.use(gate.middleware());
-
-
 
         i18n.configure({
             locales: ['en', 'fa'],

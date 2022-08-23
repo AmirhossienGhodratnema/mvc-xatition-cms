@@ -1,6 +1,5 @@
 const autoBind = require('auto-bind');
 const { validationResult } = require('express-validator/check');
-const res = require('express/lib/response');
 const Recaptcha = require('express-recaptcha').RecaptchaV2;
 const isMongoId = require('validator/lib/isMongoId')
 const sprintf = require('sprintf-js').sprintf;

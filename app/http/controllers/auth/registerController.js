@@ -19,7 +19,7 @@ module.exports = new class RegisterController extends Controller {
     async registerProccess(req, res, next) {
         try {
             // return res.json(req.body)
-            await this.RecaptchaValidation(req, res);
+            // await this.RecaptchaValidation(req, res);
             let resutl = await this.ValidationData(req);
             if (resutl) return this.Back(req, res);
             await this.register(req, res, next);
